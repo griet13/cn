@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<stdbool.h>
+#define max_frames 10
+int main(){
+    int n,m,end,ack=0,start=0;
+    bool ack_recieved[max_frames]={false};
+    scanf("%d",&n);
+    scanf("%d",&m);
+    while(start<n){
+        end=(start+m > n)?n:start+m;
+        for(int i=start;i<end;i++){
+            printf("Frame %d has been transmitted.\n",i);
+        }
+        for(int i=start;i<end;i++){
+            scanf("%d",&ack);
+            if(ack==i){
+                ack_recieved[i]=true;
+                printf("Ack %d received.\n", ack);
+            }
+            else{
+                printf("Frame %d lost, will resend.\n",i);
+            }
+        }
+        for(int i=start;i<end;i++){
+            if(!ack_recieved[i]){
+                printf("Retransmitting frame %d\n",i);
+                ack_recieved[i]=true;
+            }
+        }
+        while(start<n && ack_recieved[start]){
+            start++;
+        }
+    }
+}
