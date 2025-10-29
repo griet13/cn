@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int gcd(int a,int b){
+    while(b!=0){
+        int temp=b;
+        b=a%b;
+        a=temp;
+    }
+    return a;
+}
+
+long long mod_exp(long long base,long long expo,long long mod){
+    long long res=1;
+    while(expo>0){
+        if(expo%2==1){
+            res=(res*base)%mod;
+        }
+        base=(base*base)%mod;
+        expo/=2;
+    }
+    return res;
+}
+
+int main(){
+    long long p,q,n,phi,e=2,d=0,enc,dec,message;
+    scanf("%lld",&p);
+    scanf("%lld",&q);
+    n=p*q;
+    phi=(p-1)*(q-1);
+    while(gcd(e,phi)!=1){
+        e++;
+    }
+    while((e*d)%phi!=1){
+        d++;
+    }
+    printf("Public Key (n = %lld, e = %lld)\n", n, e);
+    printf("Private Key (n = %lld, d = %lld)\n", n, d);
+    do{
+        printf("Enter a message to encrypt:\n");
+        scanf("%d",&message);
+    }while(message>=n);
+    enc=mod_exp(message,e,n);
+    printf("Encrypted message: %lld\n",enc);
+    dec=mod_exp(enc,d,n);
+    printf("Decrypted message: %lld\n",dec);
+}
