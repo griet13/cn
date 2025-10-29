@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+    int tokens=0,rate=3,n=6,req=4,q=0;
+    int size[]={4,6,8,2,1,5};
+    for(int i=0;i<n;i++){
+        tokens+=rate;
+        printf("no of tokens added:%d",tokens);
+        printf("\nTime: %d seconds\n",i+1);
+        printf("Incoming packet size: %d\n",size[i]);
+        if(tokens<req){
+            q+=size[i];
+        }
+        else{
+            tokens-=req;
+            while(q>0 && tokens>=req){
+                printf("Processing queued packet of size %d\n", q);
+                tokens-=req;
+                q=0;
+            }
+        }
+    }
+    printf("Tokens in bucket : %d\n",tokens);
+    printf("Packets in queue : %d\n",q);
+
+}
