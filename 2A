@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <unistd.h>
+int main(){
+    int n,i=1,j=1,x;
+    scanf("%d",&n);
+    while(n>0){
+        printf("sending frames is:%d",i);
+        x=rand()%10;
+        if(x%10==0){
+            for(int k=1;k<2;k++){
+                printf("\nwaiting for %d seconds\n",k); 
+                sleep(k);
+            }
+            printf("\nsending frame %d",i); 
+            x=rand()%10;
+        }
+        printf("\nack for frame %d\n",j);
+        n--;
+        i++;
+        j++;
+    }
+}
