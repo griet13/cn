@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+    int n,frames[50],count;
+    char str[n][50];
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&frames[i]);
+    }
+    for(int i=0;i<n;i++){
+        scanf("%s",&str[i]);
+        while(strlen(str[i])>frames[i]){
+            printf("entered string exceeding the maxsize!!\n enter again: ");
+            scanf("%s",&str[i]);
+        }
+    }
+    for(int i=0;i<n;i++){
+        count=0;
+        for(int j=0;j<strlen(str[i]);j++){
+            if(str[i][j]!=' '){
+                count++;
+            }
+        }
+        printf("char count in frame %d is %d\n",i+1,count);
+    }
+}
