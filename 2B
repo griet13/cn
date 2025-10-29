@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(){
+    int n,m,sent=0,ack=0,start=0;
+    scanf("%d",&n);
+    scanf("%d",&m);
+    while(start<n){
+        for(int i=0;i<m && (start+i)<n;i++){
+            printf("Frame %d has been transmitted\n",start+i);
+        }
+        scanf("%d",&ack);
+        if(ack>=n){
+            break;
+        }
+        if(ack>=start && ack<start+m){
+            printf("Acknowledgment %d received.\n", ack);
+            start=ack+1;
+        }
+        else{
+            printf("Invalid ack %d. Please resend window.\n", ack);
+        }
+    }
+}
