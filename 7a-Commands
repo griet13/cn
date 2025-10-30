@@ -1,0 +1,42 @@
+###PC-0
+IP  10.0.0.1  Default Gateway  10.0.0.2
+
+###PC-1
+IP  20.0.0.1  Default Gateway  20.0.0.2
+
+
+Router>en
+Router#conf t
+Router(config)#enable secret amaan
+Router(config)#no ip domain-lookup
+Router(config)#line con 0
+Router(config-line)#password amaan
+Router(config-line)#login
+Router(config-line)#exit
+
+Router(config)#int fa0/0
+Router(config-if)#ip address 10.0.0.2 255.0.0.0
+Router(config-if)#no shut
+
+Router(config-if)#line vty 0 15
+Router(config-line)#password amaan
+Router(config-line)#login
+Router(config-line)#exit
+Router(config)#exit
+Router#exit
+
+Router con0 is now available
+
+Press RETURN to get started.
+
+User Access Verification
+
+Password:  ## type amaan as password
+
+Router>en
+Password:  ## type amaan as password
+Router#conf t
+Router(config)#int fa1/0
+Router(config-if)#ip address 20.0.0.2 255.0.0.0
+Router(config-if)#no shut
+Router(config-if)#exit
